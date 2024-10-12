@@ -1,0 +1,40 @@
+1. Boyut ve Esneklik
+
+	•	Dizi (Array):
+	•	Sabit boyut: Oluşturulduktan sonra dizinin boyutu değiştirilemez.
+	•	Tanımlama sırasında boyutunu belirtmeniz gerekir.
+	•	ArrayList:
+	•	Dinamik boyut: Gerektiğinde büyüyebilir veya küçülebilir.
+	•	Eleman eklendikçe veya çıkarıldıkça otomatik olarak boyutunu ayarlar.
+
+2. Tip
+
+	•	Dizi:
+	•	Temel tipleri (örneğin, int, char, vb.) ve nesneleri saklayabilir.
+	•	Belirli bir türle tanımlanır (örneğin, int[] tamsayılar için).
+	•	ArrayList:
+	•	Sadece nesneleri saklayabilir (doğrudan temel tipleri saklayamaz; bunun için sarıcı sınıfları kullanmanız gerekir, örneğin Integer, Character, vb.).
+	•	Generikler kullanılarak tanımlanır (örneğin, ArrayList<Integer> tamsayılar için).
+
+3. Performans
+
+	•	Dizi:
+	•	Elemanlara erişim açısından daha hızlıdır çünkü elemanlar bitişik bellek alanlarında saklanır.
+	•	Boyut önceden biliniyorsa bellek kullanımı açısından daha verimlidir.
+	•	ArrayList:
+	•	Dinamik boyutlandırma ve elemanlara erişim için metod çağrıları nedeniyle biraz daha yavaştır.
+	•	Temel tipleri sarıcı sınıflarda sarmaladığı için daha fazla bellek yükü vardır.
+
+4. İşlevsellik
+
+	•	Dizi:
+	•	Temel bir yapı olup, arama, sıralama gibi işlemler için yerleşik metodları yoktur.
+	•	ArrayList:
+	•	add(), remove(), contains(), size() ve clear() gibi birçok yararlı metoda sahiptir, bu da koleksiyonun daha kolay bir şekilde işlenmesini sağlar.
+
+5. Çok Boyutlu Destek
+
+	•	Dizi:
+	•	Çok boyutlu dizileri destekler (örneğin, int[][] 2B diziler için).
+	•	ArrayList:
+	•	Listelerin listelerini destekler, ancak daha karmaşık ve ek yönetim gerektirir (örneğin, ArrayList<ArrayList<Integer>>).

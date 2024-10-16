@@ -1,3 +1,7 @@
+/*
+    •	Dış Sınıfa Erişim: Non-statistik iç sınıflar, dış sınıfın örnek değişkenlerine ve yöntemlerine erişebilirler. Bu, dış sınıfın durumuna (state) doğrudan erişim sağlar.
+	•	Oluşturma: Non-statistik iç sınıfın bir örneğini oluşturmak için önce dış sınıfın bir örneği oluşturulmalıdır.
+*/
 class OuterClass {
     int x = 10;
     

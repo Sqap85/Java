@@ -35,6 +35,9 @@ public class Main {
             } catch (IllegalArgumentException e) {
                 System.out.println("Girdiniz hatali, lutfen tekrar deneyin.");
             }
+              catch (Exception e){
+                System.out.println("Hata:"+e.getMessage());
+            }
         }
 
         if (icecekler.isEmpty()) {// liste bos  ise

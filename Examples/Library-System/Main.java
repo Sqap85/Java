@@ -1,3 +1,4 @@
+// 85 is biggest.
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ public class Main {
             System.out.println("1. Add Book");
             System.out.println("2. Remove Book");
             System.out.println("3. Print Book Information");
-            System.out.println("4. Show All Books"); // New option
+            System.out.println("4. Show All Books"); 
             System.out.println("5. Show Book Count");
             System.out.println("6. Exit");
             System.out.print("Please select an option (1-6): ");
@@ -29,7 +30,7 @@ public class Main {
                     String title;
                     String author;
                     int page;
-                    String description; // Variable for description
+                    String description;
                     double price;
                     Type type;
 

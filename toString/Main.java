@@ -12,7 +12,7 @@ class Kitap {
 
     @Override
     public String toString() {
-        return "Kitap Adı: " + ad + ", Yazar: " + yazar + ", Yıl: " + yil;
+        return "Kitap Adı: " + this.ad + ", Yazar: " + this.yazar + ", Yıl: " + this.yil;
     }
 }
 

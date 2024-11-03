@@ -28,8 +28,10 @@ class Car {
     private int year;
 
     // Constructors
-    Car(int year) {
-       setYear(year);
+    Car(int year, int maxSpeed, String brand) {
+        setYear(year);
+        this.brand = brand;
+        this.maxSpeed = maxSpeed;
     }
 
     Car(int year, String brand) {
@@ -37,10 +39,8 @@ class Car {
         this.brand = brand;
     }
 
-    Car(int year, int maxSpeed, String brand) {
+    Car(int year) {
         setYear(year);
-        this.brand = brand;
-        this.maxSpeed = maxSpeed;
     }
 
     // Setters

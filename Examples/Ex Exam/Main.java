@@ -1,10 +1,11 @@
+// 85 IS BIGGEST AMCIKKK
 public class Main {
     public static void main(String[] args) {
         try {
             // Create three Car objects using different constructors
             Car car1 = new Car(2020);  // Using constructor with year only
             Car car2 = new Car(2018, "Toyota");  // Using constructor with year and brand
-            Car car3 = new Car(2021, 180, "Honda");  // Using constructor with year, maxSpeed, and brand
+            Car car3 = new Car(2021, "Honda", 280);  // Using constructor with year, maxSpeed, and brand
 
             // Attempt to set an invalid year to trigger the exception
             // car3.setYear(2023);  // This will throw an exception
@@ -23,24 +24,23 @@ public class Main {
 }
 
 class Car {
-    private String brand = "Unknown"; // Default brand
-    private int maxSpeed = 120; // Default max speed
+    private String brand; // Default brand
+    private int maxSpeed; // Default max speed
     private int year;
 
     // Constructors
-    Car(int year, int maxSpeed, String brand) {
-        setYear(year);
+    Car(int year, String brand, int maxSpeed) {
+        this.setYear(year);
         this.brand = brand;
         this.maxSpeed = maxSpeed;
     }
 
     Car(int year, String brand) {
-        setYear(year);
-        this.brand = brand;
+       this(year,brand,120);//default max speed 120
     }
 
     Car(int year) {
-        setYear(year);
+        this(year,"Unknown",120);//default max speed 120
     }
 
     // Setters

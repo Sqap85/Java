@@ -24,8 +24,8 @@ public class Main {
 }
 
 class Car {
-    private String brand; // Default brand
-    private int maxSpeed; // Default max speed
+    private String brand; 
+    private int maxSpeed; 
     private int year;
 
     // Constructors

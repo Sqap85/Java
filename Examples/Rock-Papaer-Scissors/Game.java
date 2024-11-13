@@ -7,30 +7,30 @@ public class Game {
     }
 
     public void decideWinner(Player player1, Player player2) {
-        Handsing p1Move = player1.handsing;
-        Handsing p2Move = player2.handsing;
+        Handsign p1Move = player1.handsign;
+        Handsign p2Move = player2.handsign;
 
         if (p1Move == p2Move) {
             System.out.println("It's a draw!");
             Player.draws++;
-        } else if ((p1Move == Handsing.ROCK && p2Move == Handsing.SCISSORS) ||
-                (p1Move == Handsing.PAPER && p2Move == Handsing.ROCK) ||
-                (p1Move == Handsing.SCISSORS && p2Move == Handsing.PAPER)) {
+        } else if ((p1Move == Handsign.ROCK && p2Move == Handsign.SCISSORS) ||
+                (p1Move == Handsign.PAPER && p2Move == Handsign.ROCK) ||
+                (p1Move == Handsign.SCISSORS && p2Move == Handsign.PAPER)) {
             System.out.println(player1.name + " wins this round!");
-            player1.Win(player1);
+            player1.win();
         } else {
             System.out.println(player2.name + " wins this round!");
-            player2.Win(player2);
+            player2.win();
         }
 
         Player.rounds++;
     }
 
-    public Handsing convertInputToHand(String input) {
+    public Handsign convertInputToHand(String input) {
         switch (input) {
-            case "r": return Handsing.ROCK;
-            case "p": return Handsing.PAPER;
-            case "s": return Handsing.SCISSORS;
+            case "r": return Handsign.ROCK;
+            case "p": return Handsign.PAPER;
+            case "s": return Handsign.SCISSORS;
             default: return null; // This shouldn't happen with valid input
         }
     }

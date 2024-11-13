@@ -1,4 +1,4 @@
-public enum Handsing {
+public enum Handsign {
     ROCK,
     PAPER,
     SCISSORS;

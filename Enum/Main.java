@@ -1,8 +1,4 @@
-/*
-	• Tip Güvenliği: Enum kullanarak belirli sabit değerleri kısıtlayarak, hatalı değer atamalarını engelleyebilirsiniz.
-	• Kodun Okunabilirliği: Enum sabitleri ile kodun ne anlama geldiği daha açık olur.
-	• Kolay Kullanım: Enum’lar sabitler ve ilişkili verilerle çalışmayı kolaylaştırır.
- */
+
 /*
 	• Tip Güvenliği: Enum kullanarak belirli sabit değerleri kısıtlayarak, hatalı değer atamalarını engelleyebilirsiniz.
 	• Kodun Okunabilirliği: Enum sabitleri ile kodun ne anlama geldiği daha açık olur.

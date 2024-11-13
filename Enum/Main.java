@@ -47,6 +47,7 @@ public class Main {
         Oyuncu oyuncu2 = new Oyuncu("Ahmet", Pozisyon.DEFANS);
         Oyuncu oyuncu3 = new Oyuncu("Ayşe", Pozisyon.ORTA_SAHA);
         Oyuncu oyuncu4 = new Oyuncu("Fatma", Pozisyon.FORVET);
+	    // Oyuncu oyuncu = Oyuncu.KALECI; // direk mainde enum boyle tanimlanir.
 
         oyuncu1.oyuncuBilgileriniYazdir(); // Oyuncu İsmi: Ali, Pozisyon: KALECI, Numara: 1
         oyuncu2.oyuncuBilgileriniYazdir(); // Oyuncu İsmi: Ahmet, Pozisyon: DEFANS, Numara: 5

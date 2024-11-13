@@ -1,7 +1,7 @@
 public class Player {
 
     String name;
-    Handsing handsign;
+    Handsign handsign;
     int wins;
     static int draws;
     static int rounds;
@@ -10,11 +10,11 @@ public class Player {
         this.name = name;
     }
 
-    public void Win(Player player) {
-        player.wins++;
+    public void win() {
+        this.wins++;
     }
 
-    public void Move(Handsing handsing) {
-        this.handsing = handsing;
+    public void move(Handsign handsign) {
+        this.handsign = handsign;
     }
 }

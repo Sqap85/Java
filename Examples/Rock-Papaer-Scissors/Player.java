@@ -1,7 +1,7 @@
 public class Player {
 
     String name;
-    Handsing handsing;
+    Handsing handsign;
     int wins;
     static int draws;
     static int rounds;

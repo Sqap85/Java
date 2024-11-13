@@ -48,17 +48,17 @@ public class Main {
             }
 
             // Eğer Player 2 oyunu terk ettiyse, dışarı çık
-           if (!gameActive) {
+            if (!gameActive) {
                 break;
             }
 
             // Player moves
-            player1.Move(game.convertInputToHand(player1Move));
-            player2.Move(game.convertInputToHand(player2Move));
+            player1.move(game.convertInputToHand(player1Move));
+            player2.move(game.convertInputToHand(player2Move));
 
             // Show the moves
-            System.out.println(player1.name + " chose " + player1.handsing);
-            System.out.println(player2.name + " chose " + player2.handsing);
+            System.out.println(player1.name + " chose " + player1.handsign);
+            System.out.println(player2.name + " chose " + player2.handsign);
 
             // Decide winner
             game.decideWinner(player1, player2);

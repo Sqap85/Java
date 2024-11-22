@@ -11,6 +11,7 @@ public class Main {
             System.out.println(pizza);
         }
 
+        // sicilian.Make();
         // sicilian nesnesi Pizza türünde olduğu için Make() metoduna erişim sağlanamaz.
         // Ancak, downcasting ile erişim sağlanabilir.
 

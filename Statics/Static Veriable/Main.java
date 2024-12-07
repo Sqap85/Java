@@ -28,6 +28,7 @@ public class Main {
 
         // Static değişkeni sınıf üzerinden değiştirebiliriz
         Araba.tekerlekSayisi = 6;
+	//araba1.tekerlekSayisi = 5; // Yanlış: Statik değişkeni nesne üzerinden değiştirmek doğru değildir.
 
         araba1.bilgileriGoster(); // Model: BMW, Tekerlek Sayısı: 6
         araba2.bilgileriGoster(); // Model: Mercedes, Tekerlek Sayısı: 6

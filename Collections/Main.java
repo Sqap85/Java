@@ -1,3 +1,11 @@
+/*
+Java Collections Framework Nedir?
+
+Java Collections Framework, verileri bir arada tutmak ve yönetmek için kullanılan bir API’dir. Bir collection, bir grup nesneyi (elemanları) bir arada tutan bir yapıdır. Collections Framework, verileri depolamak, işlemek ve üzerinde işlem yapmak için bir dizi arayüz, uygulama ve algoritma sunar. Framework’ün bileşenleri:
+	1.	Arayüzler (Interfaces): Koleksiyonların temel davranışlarını tanımlar (ör. List, Set, Map).
+	2.	Uygulamalar (Implementations): Arayüzleri hayata geçiren sınıflardır (ör. ArrayList, LinkedList, HashSet).
+	3.	Algoritmalar (Algorithms): Koleksiyonlar üzerinde çalışan yararlı işlemleri içerir (ör. sıralama, arama).
+*/
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;

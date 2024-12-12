@@ -32,7 +32,10 @@ class Worker {
         Worker w1 = new Worker("Homer", 35, 120);
         Worker w2 = new Worker("Homer", 35, 120);
 
+        // == operatörü ile nesnelerin karşılaştırılması
         System.out.println(w1 == w2); // false, çünkü farklı nesneler
+
+        // equals() metodu ile nesnelerin içeriklerinin karşılaştırılması
         System.out.println(w1.equals(w2)); // true, çünkü içerikleri eşit
     }
 }

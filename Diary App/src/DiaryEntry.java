@@ -1,19 +1,29 @@
-
 import java.time.LocalDate;
 
 public class DiaryEntry {
+    // Günlük girişi bilgilerini tutan sınıf
+
+    // Günlük girişinin benzersiz ID'si
     private int entryID;
+
+    // Günlük başlığı
     private String title;
+
+    // Günlük içeriği
     private String content;
+
+    // Günlük tarih bilgisi
     private LocalDate date;
 
+    // Constructor: Günlük giriş nesnesi oluşturur
     public DiaryEntry(int entryID, String title, String content, LocalDate date) {
-        this.entryID = entryID;
-        this.title = title;
-        this.content = content;
-        this.date = date;
+        this.entryID = entryID; // ID atanır
+        this.title = title; // Başlık atanır
+        this.content = content; // İçerik atanır
+        this.date = date; // Tarih atanır
     }
 
+    // Getter ve setter metodları: Alanlara erişim ve düzenleme sağlar
     public int getEntryID() {
         return entryID;
     }
@@ -46,6 +56,7 @@ public class DiaryEntry {
         this.date = date;
     }
 
+    // toString metodu: Günlük girişini okunabilir bir formatta döner
     @Override
     public String toString() {
         return "ID: " + entryID + ", Title: " + title + ", Date: " + date + "\nContent: " + content;

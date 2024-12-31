@@ -6,84 +6,85 @@ public class LoginScreen extends JFrame {
 
     public LoginScreen(DiaryManager manager) {
         this.manager = manager;
-        setTitle("Personal Diary - Login");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(400, 300);
-        setLocationRelativeTo(null);
+        setTitle("Personal Diary - Login"); // Pencere başlığı ayarlanıyor
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // Pencere kapatıldığında uygulama sonlanacak
+        setSize(400, 300); // Pencere boyutu ayarlanıyor
+        setLocationRelativeTo(null); // Pencere ekranın ortasına yerleştiriliyor
 
-        // Login Panel
-        JPanel panel = new JPanel(new GridLayout(4, 2));
-        JLabel userLabel = new JLabel(" Username:");
-        JLabel passLabel = new JLabel(" Password:");
-        JTextField usernameField = new JTextField();
-        JPasswordField passwordField = new JPasswordField();
-        JCheckBox showPasswordCheckBox = new JCheckBox("Show Password");
-        JButton loginButton = new JButton("Login");
-        JButton registerButton = new JButton("Register");
+        // Login Panel oluşturuluyor ve düzenleniyor
+        JPanel panel = new JPanel(new GridLayout(4, 2)); // 4 satır, 2 sütunlu bir ızgara düzeni
+        JLabel userLabel = new JLabel(" Username:"); // Kullanıcı adı etiketi
+        JLabel passLabel = new JLabel(" Password:"); // Şifre etiketi
+        JTextField usernameField = new JTextField(); // Kullanıcı adı girişi için metin alanı
+        JPasswordField passwordField = new JPasswordField(); // Şifre girişi için parola alanı
+        JCheckBox showPasswordCheckBox = new JCheckBox("Show Password"); // Şifre gösterme seçeneği
+        JButton loginButton = new JButton("Login"); // Giriş butonu
+        JButton registerButton = new JButton("Register"); // Kayıt ol butonu
 
+        // Bileşenler panele ekleniyor
         panel.add(userLabel);
         panel.add(usernameField);
         panel.add(passLabel);
         panel.add(passwordField);
-        panel.add(showPasswordCheckBox); // Checkbox ekleniyor
-        panel.add(new JLabel()); // Layout uyumu için boş bir alan ekleniyor
+        panel.add(showPasswordCheckBox); // Şifre gösterme kutusu
+        panel.add(new JLabel()); // Layout düzeni için boş bir alan
         panel.add(loginButton);
         panel.add(registerButton);
-        add(panel);
+        add(panel); // Panel pencereye ekleniyor
 
-        // Show Password Action
+        // Şifre gösterme kutusu seçildiğinde şifreyi göster/gizle
         showPasswordCheckBox.addActionListener(e -> {
             if (showPasswordCheckBox.isSelected()) {
-                passwordField.setEchoChar((char) 0); // Parola maskesi kaldırılıyor
+                passwordField.setEchoChar((char) 0); // Şifre maskesi kaldırılıyor
             } else {
-                passwordField.setEchoChar('•'); // Parola maskesi geri konuluyor
+                passwordField.setEchoChar('•'); // Şifre maskesi geri konuluyor
             }
         });
 
-        // Login Action
+        // Login işlemi
         loginButton.addActionListener(e -> {
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
+            String username = usernameField.getText(); // Kullanıcı adı metni alınıyor
+            String password = new String(passwordField.getPassword()); // Şifre alınıyor
 
-            if (username.isEmpty() || password.isEmpty()) {
+            if (username.isEmpty() || password.isEmpty()) { // Alanlar boşsa hata mesajı
                 JOptionPane.showMessageDialog(this, "Username or Password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-            } else if (username.contains(" ") || password.contains(" ")) {
+            } else if (username.contains(" ") || password.contains(" ")) { // Alanlarda boşluk varsa hata mesajı
                 JOptionPane.showMessageDialog(this, "Username or Password cannot contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                if (manager.login(username, password)) {
+                if (manager.login(username, password)) { // Giriş başarılıysa dashboard açılıyor
                     JOptionPane.showMessageDialog(this, "Login Successful!");
-                    openDiaryDashboard();
-                } else {
+                    openDiaryDashboard(); // Dashboard ekranına geçiş
+                } else { // Giriş başarısızsa hata mesajı
                     JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
-// Register Action
+        // Register işlemi
         registerButton.addActionListener(e -> {
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
+            String username = usernameField.getText(); // Kullanıcı adı metni alınıyor
+            String password = new String(passwordField.getPassword()); // Şifre alınıyor
 
-            if (username.isEmpty() || password.isEmpty()) {
+            if (username.isEmpty() || password.isEmpty()) { // Alanlar boşsa hata mesajı
                 JOptionPane.showMessageDialog(this, "Username or Password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
-            } else if (username.contains(" ") || password.contains(" ")) {
+            } else if (username.contains(" ") || password.contains(" ")) { // Alanlarda boşluk varsa hata mesajı
                 JOptionPane.showMessageDialog(this, "Username or Password cannot contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                if (manager.register(username, password)) {
+                if (manager.register(username, password)) { // Kayıt başarılıysa bilgilendirme
                     JOptionPane.showMessageDialog(this, "Registration Successful! Please log in.");
-                    // Clear fields after successful registration
-                    usernameField.setText(""); // Clear username field
-                    passwordField.setText(""); // Clear password field
-                } else {
+                    usernameField.setText(""); // Kullanıcı adı alanı temizleniyor
+                    passwordField.setText(""); // Şifre alanı temizleniyor
+                } else { // Kayıt başarısızsa hata mesajı
                     JOptionPane.showMessageDialog(this, "Username already exists.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
     }
 
+    // Başarılı giriş yapıldığında dashboard ekranı açılıyor
     private void openDiaryDashboard() {
-        DiaryDashboard dashboard = new DiaryDashboard(manager);
-        dashboard.setVisible(true);
-        this.dispose();
+        DiaryDashboard dashboard = new DiaryDashboard(manager); // Dashboard nesnesi oluşturuluyor
+        dashboard.setVisible(true); // Dashboard görünür yapılıyor
+        this.dispose(); // Login ekranı kapatılıyor
     }
 }

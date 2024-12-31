@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiaryManager {
+    // Veritabanı yöneticisi ve kullanıcı bilgisi
     private final DatabaseManager dbManager;
-    private int currentUserId = -1;
+    private int currentUserId = -1; // Giriş yapmış kullanıcının ID'si
 
     public DiaryManager(DatabaseManager dbManager) {
-        this.dbManager = dbManager;
+        this.dbManager = dbManager; // Veritabanı yöneticisi örneği atanır
     }
 
     // Kullanıcı kayıt işlemi
     public boolean register(String username, String password) {
+        // Kullanıcı adı ve şifre boş olmamalıdır
         if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
             System.err.println("Kullanıcı adı ve şifre boş olamaz.");
-            return false;  // Return false if either is empty
+            return false;
         }
 
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
@@ -39,7 +41,7 @@ public class DiaryManager {
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                currentUserId = rs.getInt("id");
+                currentUserId = rs.getInt("id"); // Kullanıcı ID'si atanır
                 return true;
             }
         } catch (SQLException e) {
@@ -48,14 +50,14 @@ public class DiaryManager {
         return false;
     }
 
-    // Günlük ekleme
+    // Günlük ekleme işlemi
     public void addEntry(String title, String content) {
         String sql = "INSERT INTO diary_entries (user_id, title, content, date) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = dbManager.getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, currentUserId);
             pstmt.setString(2, title);
             pstmt.setString(3, content);
-            pstmt.setString(4, LocalDate.now().toString());  // LocalDate.now() kullanıldı
+            pstmt.setString(4, LocalDate.now().toString()); // Günlük tarihi bugünkü tarih olarak ayarlanır
             pstmt.executeUpdate();
             System.out.println("Günlük başarıyla eklendi.");
         } catch (SQLException e) {
@@ -63,7 +65,7 @@ public class DiaryManager {
         }
     }
 
-    // Günlükleri görüntüleme
+    // Belirli tarihler arasında günlükleri görüntüleme
     public List<String> viewEntries(LocalDate startDate, LocalDate endDate) {
         List<String> entries = new ArrayList<>();
         String sql = "SELECT title, content, date FROM diary_entries WHERE user_id = ? AND date BETWEEN ? AND ? ORDER BY date";
@@ -73,6 +75,7 @@ public class DiaryManager {
             pstmt.setString(3, endDate.toString());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
+                // Başlık, içerik ve tarihi listeye ekler
                 entries.add("Title: " + rs.getString("title") +
                         ", Date: " + rs.getString("date") + "\nContent: " + rs.getString("content"));
             }
@@ -82,26 +85,28 @@ public class DiaryManager {
         return entries;
     }
 
-    // Günlük silme
+    // Günlük silme işlemi
     public void deleteEntry(int entryId) {
         String sql = "DELETE FROM diary_entries WHERE id = ? AND user_id = ?";
         try (PreparedStatement pstmt = dbManager.getConnection().prepareStatement(sql)) {
-            pstmt.setInt(1, entryId);  // Silmek istenen günlük ID'sini veriyoruz
-            pstmt.setInt(2, currentUserId);  // Kullanıcının ID'siyle karşılaştırıyoruz
-            pstmt.executeUpdate();  // Silme işlemini yapıyoruz
+            pstmt.setInt(1, entryId); // Silinecek günlük ID'si
+            pstmt.setInt(2, currentUserId); // Giriş yapmış kullanıcı ID'si
+            pstmt.executeUpdate();
             System.out.println("Günlük başarıyla silindi.");
         } catch (SQLException e) {
             System.err.println("Günlük silinirken hata: " + e.getMessage());
         }
     }
 
+    // Kullanıcının tüm günlüklerini alma
     public List<DiaryEntry> getEntries() {
         List<DiaryEntry> entries = new ArrayList<>();
         String sql = "SELECT id, title, content, date FROM diary_entries WHERE user_id = ? ORDER BY date";
         try (PreparedStatement pstmt = dbManager.getConnection().prepareStatement(sql)) {
-            pstmt.setInt(1, currentUserId);  // Kullanıcının ID'sini kullanıyoruz
+            pstmt.setInt(1, currentUserId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
+                // Günlük nesneleri oluşturur ve listeye ekler
                 entries.add(new DiaryEntry(
                         rs.getInt("id"),
                         rs.getString("title"),
@@ -115,30 +120,30 @@ public class DiaryManager {
         return entries;
     }
 
-    // Günlük güncelleme
+    // Günlük güncelleme işlemi
     public void updateEntry(int entryId, String newTitle, String newContent) {
         String sql = "UPDATE diary_entries SET title = ?, content = ? WHERE id = ? AND user_id = ?";
         try (PreparedStatement pstmt = dbManager.getConnection().prepareStatement(sql)) {
-            pstmt.setString(1, newTitle);
-            pstmt.setString(2, newContent);
-            pstmt.setInt(3, entryId);
-            pstmt.setInt(4, currentUserId);
+            pstmt.setString(1, newTitle); // Yeni başlık
+            pstmt.setString(2, newContent); // Yeni içerik
+            pstmt.setInt(3, entryId); // Güncellenecek günlük ID'si
+            pstmt.setInt(4, currentUserId); // Kullanıcı doğrulaması
             pstmt.executeUpdate();
             System.out.println("Günlük başarıyla güncellendi.");
         } catch (SQLException e) {
             System.err.println("Günlük güncellenirken hata: " + e.getMessage());
         }
     }
-    // Başlığa göre arama yapma
+
+    // Başlığa göre günlük arama
     public List<String> searchEntriesByTitle(String title) {
         List<String> entries = new ArrayList<>();
         String sql = "SELECT title, content, date FROM diary_entries WHERE user_id = ? AND title LIKE ? ORDER BY date";
         try (PreparedStatement pstmt = dbManager.getConnection().prepareStatement(sql)) {
             pstmt.setInt(1, currentUserId);
-            pstmt.setString(2, "%" + title + "%"); // Başlığın herhangi bir kısmını eşleştir
+            pstmt.setString(2, "%" + title + "%"); // Başlık parçasını eşleştir
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                // ID'yi çıkarıp sadece başlık, içerik ve tarihi ekliyoruz
                 entries.add("Title: " + rs.getString("title") +
                         ", Date: " + rs.getString("date") + "\nContent: " + rs.getString("content"));
             }
@@ -148,8 +153,7 @@ public class DiaryManager {
         return entries;
     }
 
-
-    // Günlük ID'sine göre mevcut girdiyi alır
+    // Günlük ID'sine göre günlük alma
     public DiaryEntry getEntryById(int entryId) {
         String sql = "SELECT id, title, content, date FROM diary_entries WHERE id = ? AND user_id = ?";
         try (PreparedStatement pstmt = dbManager.getConnection().prepareStatement(sql)) {
@@ -157,6 +161,7 @@ public class DiaryManager {
             pstmt.setInt(2, currentUserId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
+                // Bulunan günlük nesnesini döner
                 return new DiaryEntry(
                         rs.getInt("id"),
                         rs.getString("title"),
@@ -167,11 +172,11 @@ public class DiaryManager {
         } catch (SQLException e) {
             System.err.println("Günlük verisi alınırken hata: " + e.getMessage());
         }
-        return null; // Eğer bulamazsa null döner
+        return null; // Eğer günlük bulunamazsa null döner
     }
 
-    // Oturumu kapatma
+    // Oturumu kapatma işlemi
     public void logout() {
-        currentUserId = -1;
+        currentUserId = -1; // Kullanıcı çıkışı yapıldığında ID sıfırlanır
     }
 }
